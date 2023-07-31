@@ -1,16 +1,14 @@
 # SS-Config-Generator
 A simple tool for generating URL and QRcode of Shadowsocks and ShadowsocksR client configurations
 
-# Todo List
+## Features/fixes
 This project is forked from zhiyuan-l/SS-Config-Generator, I will make the following changes
 
-- Copy URL / Copy QRcode button
-- URL to QRcode
-- Set a default Method
-- Quick Share function (email or wechat)
-
-# Done
-- Fix 404 SS schema page to https://shadowsocks.org/doc/configs.html
+- [ ]Copy URL / Copy QRcode button
+- [ ]URL to QRcode
+- [ ]Set a default Method
+- [ ]Quick Share function (email or wechat)
+- [x]Fix 404 SS schema page to https://shadowsocks.org/doc/configs.html
 
 ## Getting Started
 
@@ -21,7 +19,7 @@ You can also find a demo at [Github Pages](https://liveinaus.github.io/SS-Config
 ## Built With
 
 * [Bootstrap](https://github.com/twbs/bootstrap) - Web UI Framework
-* [QRCode.js](https://github.com/zhiyuan-l/qrcodejs) - QRCode Generator 
+* [QRCode.js](https://github.com/zhiyuan-l/qrcodejs) - QRCode Generator
 * [base64.js](https://github.com/dankogai/js-base64) - Base64 Tool
 
 ## Authors
