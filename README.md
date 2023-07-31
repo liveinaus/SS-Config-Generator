@@ -4,11 +4,11 @@ A simple tool for generating URL and QRcode of Shadowsocks and ShadowsocksR clie
 ## Features/fixes
 This project is forked from zhiyuan-l/SS-Config-Generator, I will make the following changes
 
-- [ ]Copy URL / Copy QRcode button
-- [ ]URL to QRcode
-- [ ]Set a default Method
-- [ ]Quick Share function (email or wechat)
-- [x]Fix 404 SS schema page to https://shadowsocks.org/doc/configs.html
+- [ ] Copy URL / Copy QRcode button
+- [ ] URL to QRcode
+- [ ] Set a default Method
+- [ ] Quick Share function (email or wechat)
+- [x] Fix 404 SS schema page to https://shadowsocks.org/doc/configs.html
 
 ## Getting Started
 
