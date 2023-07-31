@@ -3,9 +3,10 @@ A simple tool for generating URL and QRcode of Shadowsocks and ShadowsocksR clie
 
 # Todo List
 This project is forked from zhiyuan-l/SS-Config-Generator, I will make the following changes
+- Copy URL / Copy QRcode button
 - URL to QRcode
 - Set a default Method
-- Quick Share function
+- Quick Share function (email or wechat)
 
 ## Getting Started
 
