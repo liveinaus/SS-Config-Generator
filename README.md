@@ -1,6 +1,12 @@
 # SS-Config-Generator
 A simple tool for generating URL and QRcode of Shadowsocks and ShadowsocksR client configurations
 
+## Getting Started
+
+This is a static web application, you can download the zip file, extract it, then open index.html in the browser
+
+You can also find a demo at [Github Pages](https://liveinaus.github.io/SS-Config-Generator/)
+
 ## Features/fixes
 This project is forked from zhiyuan-l/SS-Config-Generator, I will make the following changes
 
@@ -9,12 +15,6 @@ This project is forked from zhiyuan-l/SS-Config-Generator, I will make the follo
 - [ ] Set a default Method
 - [ ] Quick Share function (email or wechat)
 - [x] Fix 404 SS schema page to https://shadowsocks.org/doc/configs.html
-
-## Getting Started
-
-This is a static web application, you can download the zip file, extract it, then open index.html in the browser
-
-You can also find a demo at [Github Pages](https://liveinaus.github.io/SS-Config-Generator/)
 
 ## Built With
 
