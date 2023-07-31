@@ -2,7 +2,7 @@ const SS_PREFIX = 'ss://';
 const SSR_PREFIX = 'ssr://';
 
 // scheme references
-// ss: https://shadowsocks.org/en/config/quick-guide.html
+// ss: https://shadowsocks.org/doc/configs.html
 // ssr: https://github.com/shadowsocksr-backup/shadowsocks-rss/wiki/SSR-QRcode-scheme
 
 class Config {
