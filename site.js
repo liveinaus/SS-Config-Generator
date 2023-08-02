@@ -182,6 +182,8 @@ function generateConfig() {
 	LSHelper.set("border", border);
 
 	jQuery(".result-wrapper").toggle(true);
+
+	parseUrl(jQuery("#url").val());
 }
 
 function copyUrl() {
@@ -213,4 +215,32 @@ async function copyQrCode() {
 	} catch (error) {
 		console.error("Error copying image to clipboard:", error);
 	}
+}
+
+function parseUrl(url) {
+	//TODO
+	url = url.trim();
+	if (url.startsWith("ss://")) {
+		parseSsUrl(url.substring(5));
+	} else if (url.startsWith("ssr://")) {
+		parseSsrUrl(url.substring(6));
+	}
+}
+
+function parseSsrUrl(encodedValue) {
+	console.log("parseSsrUrl", encodedValue);
+	const rawDecodeValue = atob(encodedValue);
+	console.log(rawDecodeValue);
+}
+
+function parseSsUrl(encodedValue) {
+	console.log("parseSsUrl", encodedValue);
+	const getValueAfterHash = (inputString) => (inputString.includes("#") ? inputString.split("#")[1] : undefined);
+	const removeHashSuffix = (inputString) => inputString.replace(/#.*$/, "");
+	const remarks = getValueAfterHash(encodedValue);
+	const rawDecodeValue = atob(removeHashSuffix(encodedValue));
+	console.log(rawDecodeValue, remarks);
+	return {
+		remarks: remarks,
+	};
 }
