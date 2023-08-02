@@ -9,6 +9,7 @@
     <title>Shadowsocks Config Generator</title>
     <!-- Bootstrap core CSS -->
     <link href='./lib/bootstrap/css/bootstrap.min.css' rel='stylesheet'>
+	<link href='./site.css' rel='stylesheet'>
 </head>
 
 <body class='bg-light'>
@@ -137,17 +138,17 @@
     </div>
     <hr class='mb-4'>
     <h4 class='mb-3'>Results</h4>
-    <div class='row'>
-        <div class='col-md-12'>
+    <div class='row result-wrapper'>
+        <div class='col-md-6'>
             <label for='url'>URL</label>
             <textarea type='text' class='form-control' rows='3' disabled id='url'></textarea>
+			<button class='btn btn-info btn-lg btn-block' id='copyUrlBtn' type='button'>Copy URL</button>
         </div>
-    </div>
-    <div class='row'>
-        <div class='col-md-12'>
+		<div class='col-md-6'>
             <label>QRcode</label>
-            <div align='center' id='qrcode'>
+            	<div align='center' id='qrcode'>
             </div>
+			<button class='btn btn-info btn-lg btn-block' id='copyQrCodeBtn' type='button'>Copy QRcode</button>
         </div>
     </div>
     <footer class='my-5 pt-5 text-muted text-center text-small'>
@@ -164,187 +165,7 @@
 <script src='./lib/qrcode.min.js'></script>
 <script src='./ss.js'></script>
 <script src='./gen.js'></script>
-<script type='text/javascript'>
-    const DEFAULT_QR_SIZE = 400;
-    const DEFAULT_QR_BORDER = 4;
-    const DEFAULT_GROUP = 'default';
-    const DEFAULT_LOCAL_PORT = 1080;
-    const DEFAULT_TIMEOUT = 600;
-    const DEFAULT_METHOD = METHODS[0];
-    const DEFAULT_PROTOCOL = PROTOCOLS[0];
-    const DEFAULT_OBFS = OBFSES[0];
-
-    // nodes
-    const ssrOnly = $('.ssr-only');
-
-    // add options to select
-    // both the values and the texts will the options
-    function addOptions(node, options) {
-        options.forEach(option =>
-            node
-                .append($('<option></option>')
-                    .attr('value', option)
-                    .text(option)));
-    }
-
-    $(function () {
-        // add method options
-        addOptions($('#method'), METHODS);
-        addOptions($('#protocol'), PROTOCOLS);
-        addOptions($('#obfs'), OBFSES);
-
-        // set ss type button actions
-        $('input[name=\'ssType\']').change(function () {
-            let ssrChecked = $('#ssr:checked').val();
-            ssrChecked = ssrChecked === 'on';
-            ssrChecked?ssrOnly.show():ssrOnly.hide();
-
-            // preserve status
-            LSHelper.set('ssrChecked', ssrChecked)
-        });
-
-        // for testing purpose remove later
-        $('#testBtn').click(function () {
-            $('#server').val('127.0.0.1');
-            $('#serverPort').val(1234);
-            $('#password').val('test123');
-            $('#method').val('aes-256-cfb');
-            $('#localPort').val(DEFAULT_LOCAL_PORT);
-            $('#stimeout').val(DEFAULT_TIMEOUT);
-            $('#protocol').val('origin');
-            $('#protoparam').val(null);
-            $('#obfs').val('plain');
-            $('#obfsparam').val(null);
-            $('#group').val('default');
-            $('#remarks').val('test-ac');
-        });
-
-        // restore all fields to default
-        $('#clearBtn').click(function () {
-            $('#server').val('');
-            $('#serverPort').val('');
-            $('#password').val('');
-            $('#method').val(DEFAULT_METHOD);
-            $('#localPort').val(DEFAULT_LOCAL_PORT);
-            $('#stimeout').val(DEFAULT_TIMEOUT);
-            $('#protocol').val(DEFAULT_PROTOCOL);
-            $('#protoparam').val('');
-            $('#obfs').val(DEFAULT_OBFS);
-            $('#obfsparam').val('');
-            $('#group').val(DEFAULT_GROUP);
-            $('#remarks').val('');
-            $('#url').val('');
-            $('#size').val(DEFAULT_QR_SIZE);
-            $('#border').val(DEFAULT_QR_BORDER);
-            $('#qrcode').html('');
-        });
-
-        let qrcode = null;
-
-        $('#generateBtn').on('click', function () {
-            // retrieve values
-            let server = $('#server').val();
-            let serverPort = $('#serverPort').val();
-            let password = $('#password').val();
-            let method = $('#method').val();
-            let localPort = $('#localPort').val();
-            let stimeout = $('#stimeout').val();
-            let protocol = $('#protocol').val();
-            let protoparam = $('#protoparam').val();
-            let obfs = $('#obfs').val();
-            let obfsparam = $('#obfsparam').val();
-            let group = $('#group').val();
-            let remarks = $('#remarks').val();
-            let size = $('#size').val();
-            let border = $('#border').val();
-
-            // validate size & border, default size as the fallback value
-            if (isNullOrEmpty(size) || isNaN(size)) {
-                // not a number
-                size = DEFAULT_QR_SIZE;
-            }
-
-            if (isNullOrEmpty(border) || isNaN(border)) {
-                // not a number
-                border = DEFAULT_QR_BORDER;
-            }
-
-            // construct new config
-            const config = new Config(server, serverPort, password, method, obfs, protocol, group, remarks, obfsparam, protoparam, localPort, stimeout);
-            let result = '';
-            if ($('#ss:checked').val()) {
-                result = genSSConfig(config);
-            }
-
-            if ($('#ssr:checked').val()) {
-                result = genSSRConfig(config);
-            }
-
-            // display encoded URL
-            $('#url').val(result);
-
-            // clear previous code
-            $('#qrcode').html('');
-
-            // build qrcode and display as an image
-            qrcode = new QRCode('qrcode', {
-                text: result,
-                width: size,
-                height: size,
-                border: border,
-                colorDark: '#000000',
-                colorLight: '#ffffff',
-                correctLevel: QRCode.CorrectLevel.H
-            });
-
-            LSHelper.set('config', config);
-            LSHelper.set('size', size);
-            LSHelper.set('border', border);
-        });
-
-        // restore previous settings and status
-
-        // restore ss type status
-        // check localStorage first, if no item is found, check current status
-        let ssrChecked = LSHelper.get('ssrChecked');
-        if (ssrChecked == null) {
-            ssrChecked = $('#ssr:checked').val();
-        } else {
-            $('#ssr').prop('checked', ssrChecked);
-        }
-
-        // render
-        ssrChecked?ssrOnly.show():ssrOnly.hide();
-
-        // restore qrcode size & border
-        const size = LSHelper.get('size');
-        const border = LSHelper.get('border');
-        if (size != null) {
-            $('#size').val(size);
-        }
-
-        if (border != null) {
-            $('#border').val(border);
-        }
-
-        // restore config
-        const config = LSHelper.get('config');
-        if (config != null) {
-            $('#server').val(config.server);
-            $('#serverPort').val(config.serverPort);
-            $('#password').val(config.password);
-            $('#method').val(config.method);
-            $('#localPort').val(config.localPort);
-            $('#stimeout').val(config.stimeout);
-            $('#protocol').val(config.protocol);
-            $('#protoparam').val(config.protoparam);
-            $('#obfs').val(config.obfs);
-            $('#obfsparam').val(config.obfsparam);
-            $('#group').val(config.group);
-            $('#remarks').val(config.remarks);
-        }
-    });
-</script>
+<script src='./site.js'></script>
 </body>
 
 </html>
