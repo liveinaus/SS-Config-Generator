@@ -49,7 +49,7 @@
 			<hr class="mb-4" />
 			<div class="row">
 				<div class="col-md-12">
-					<h4 class="mb-3">Config</h4>
+					<h4 class="mb-3">Config Parameters</h4>
 					&nbsp;&nbsp;&nbsp;<label>* fields are required</label>
 					<form class="needs-validation" novalidate>
 						<div class="row">
@@ -128,11 +128,11 @@
 
 			<div class="row">
 				<div class="col-md-6">
-					<button class="btn btn-primary btn-lg btn-block" id="generateBtn" type="button"><i class="fas fa-arrow-down"></i>Generate from Config</button>
+					<button class="btn btn-primary btn-lg btn-block" id="generateBtn" type="button"><i class="fas fa-arrow-down"></i><i class="fas fa-arrow-down"></i>Config Parameters to URL</button>
 				</div>
 
 				<div class="col-md-6">
-					<button class="btn btn-primary btn-lg btn-block" id="parseConfig" type="button"><i class="fas fa-arrow-up"></i>Parse URL</button>
+					<button class="btn btn-success btn-lg btn-block" id="parseConfig" type="button"><i class="fas fa-arrow-up"></i><i class="fas fa-arrow-up"></i>Parse URL to Config Parameters</button>
 				</div>
 			</div>
 
@@ -146,12 +146,12 @@
 				<div class="col-md-6">
 					<label for="url">URL</label>
 					<textarea type="text" class="form-control" rows="3" id="url"></textarea>
-					<button class="btn btn-info btn-lg btn-block" id="copyUrlBtn" type="button"><i class="far fa-copy"></i>Copy URL</button>
+					<button class="btn btn-info btn-lg btn-block copy-result-btn" id="copyUrlBtn" type="button"><i class="far fa-copy"></i>Copy URL</button>
 				</div>
 				<div class="col-md-6">
 					<label>QRcode</label>
 					<div align="center" id="qrcode"></div>
-					<button class="btn btn-info btn-lg btn-block" id="copyQrCodeBtn" type="button"><i class="far fa-copy"></i>Copy QRcode</button>
+					<button class="btn btn-info btn-lg btn-block copy-result-btn" id="copyQrCodeBtn" type="button"><i class="far fa-copy"></i>Copy QRcode</button>
 				</div>
 			</div>
 

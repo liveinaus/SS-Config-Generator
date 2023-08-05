@@ -1,7 +1,11 @@
-.btn{
+.btn {
 	margin-top: 10px;
 }
 
-.result-wrapper{
+.copy-result-btn {
 	display: none;
+}
+
+button i {
+	padding-right: 5px;
 }

@@ -13,10 +13,11 @@ You can also find a demo at [Github Pages](https://liveinaus.github.io/SS-Config
 This project is forked from zhiyuan-l/SS-Config-Generator, I will make the following changes
 
 - [x] Copy URL / Copy QRcode button
-- [ ] URL to Raw data and QRcode
-- [ ] Set a default Method
-- [ ] Quick Share function (email or wechat)
+- [x] URL to Raw data and QRcode
+- [x] Set a default Method
 - [x] Fix 404 SS schema page to https://shadowsocks.org/doc/configs.html
+- [ ] Generate config.json
+- [ ] Generate docker compose for a quick deployment
 
 ## Built With
 

@@ -120,7 +120,7 @@ function clearConfig() {
 	jQuery("#border").val(DEFAULT_QR_BORDER);
 	jQuery("#qrcode").html("");
 
-	jQuery(".result-wrapper").toggle(false);
+	jQuery(".copy-result-btn").toggle(false);
 }
 
 function generateConfig() {
