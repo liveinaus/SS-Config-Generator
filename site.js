@@ -57,6 +57,8 @@ jQuery(function () {
 
 	jQuery("#copyQrCodeBtn").on("click", copyQrCode);
 
+	jQuery("#parseConfig").on("click", parseConfigAction);
+
 	// restore previous settings and status
 
 	// restore ss type status
@@ -118,7 +120,7 @@ function clearConfig() {
 	jQuery("#border").val(DEFAULT_QR_BORDER);
 	jQuery("#qrcode").html("");
 
-	jQuery(".result-wrapper").toggle(false);
+	jQuery(".copy-result-btn").toggle(false);
 }
 
 function generateConfig() {
@@ -181,7 +183,33 @@ function generateConfig() {
 	LSHelper.set("size", size);
 	LSHelper.set("border", border);
 
-	jQuery(".result-wrapper").toggle(true);
+	jQuery(".copy-result-btn").toggle(true);
+}
+
+function parseConfigAction() {
+	const parsedConfig = parseConfig(jQuery("#url").val());
+	setConfigForm(parsedConfig);
+}
+
+function setConfigForm(config) {
+	const { server, serverPort, password, method, obfs, protocol, group, remarks, obfsparam, protoparam, localPort, stimeout } = config;
+
+	jQuery("#server").val(server);
+	jQuery("#serverPort").val(serverPort);
+	jQuery("#password").val(password);
+	jQuery("#method").val(method);
+	jQuery("#localPort").val(localPort);
+	jQuery("#stimeout").val(stimeout);
+	jQuery("#protocol").val(protocol);
+	jQuery("#protoparam").val(protoparam);
+	jQuery("#obfs").val(obfs);
+	jQuery("#obfsparam").val(obfsparam);
+	jQuery("#group").val(group);
+	jQuery("#remarks").val(remarks);
+
+	//extra
+	jQuery("#size").val(DEFAULT_QR_SIZE);
+	jQuery("#border").val(DEFAULT_QR_BORDER);
 }
 
 function copyUrl() {
